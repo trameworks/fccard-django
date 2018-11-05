@@ -1,0 +1,42 @@
+{% load staticfiles %}
+{% if partners_section %}
+  <div id="partners" class="page-section p-110-cont">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="mb-50">
+            <h2 class="section-title">{{partners_section.title}} <span class="bold">{{partners_section.title_bold}}</span></h2>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        {% if partners %}
+          <!-- CLIENTS -->
+          <div class="col-md-7">
+            <div class="row client-row border-bot">
+              {% for partner in partners %}
+                <div class="col-xs-6 col-sm-3 text-center">
+                  <img alt="{{partner.partner_name}}" src="{{partner.image.url}}">
+                </div>
+                {% if forloop.counter|divisibleby:4 %}
+              </div>
+              <div class="row client-row">
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <!-- TESTIMONIALS 1 -->
+        <div class="col-md-5">
+          <blockquote class="quote mb-0 pl-50-min-1169">
+            <p>{{partners_section.text|safe}}</p>
+            <footer>{{partners_section.author}}</footer>
+           </blockquote>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endif %}

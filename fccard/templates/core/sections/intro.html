@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<div id="index-link" class="indent-header hidden-xs">
+  <div class="slider-1 clearfix">
+
+    <div class="flex-container">
+      <div class="flexslider loading">
+        <ul class="slides">
+          {% for slide in flex_slide %}
+          <!-- SLIDE 1 -->
+          <li style="background:url({{slide.slide_image.url}}) no-repeat;background-position:50% 0">
+            <div class="container">
+              <div class="sixteen columns contain">
+                <h2 data-toptitle="38%" class="norm-50-wide norm-40-768-959 font-light top-28-767 flex-top-bot" >{{slide.first_phrase}}<br><span class="bold">{{slide.second_phrase}}</span></h2>
+              </div>
+            </div><!-- End Container -->
+          </li><!-- End item -->
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- End slider -->
+</div>

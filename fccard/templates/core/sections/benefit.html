@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+{% if benefit_section %}
+<div id="benefits" class="page-section orange-bg clearfix">
+  <div class="fes7-img-cont col-md-5">
+    <div class="fes7-img" style="background-image: url({{benefit_section.image.url}})" ></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-6 fes7-text-cont p-80-cont">
+        <h1><span class="font-light">{{benefit_section.title}}</span></h1>
+        <p class="mb-60">
+          {{benefit_section.description}}
+        </p>
+
+        <div class="row">
+          {% for topic in benefit_topics %}
+
+          <div class="col-md-6 col-sm-6">
+            <div class="fes7-box wow fadeIn" >
+              <div class="fes7-box-icon">
+                <div class="icon {{topic.icon}}"></div>
+              </div>
+              <h3>{{topic.title}}</h3>
+              <p>{{topic.description|safe}}</p>
+            </div>
+          </div>
+          {% if forloop.counter|divisibleby:2 %}
+          </div>
+          <div class="row">
+          {% endif %}
+          {% endfor %}
+          </div>
+        </div>
+    </div><!--end of row-->
+  </div>
+</div>
+{% endif %}

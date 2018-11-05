@@ -1,0 +1,64 @@
+{% if contact_us %}
+<div id="contact" class="page-section green-bg">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="contact-form-cont">
+          <!-- TITLE -->
+          <div class="mb-40">
+            <h2 class="section-title white">ENTRE EM <span class="bold">CONTATO</span></h2>
+          </div>
+
+          <!-- CONTACT FORM -->
+          <div class="">
+            <form id="contact-form" action="{% url 'core:contact_us' %}" method="POST" data-csrf-token={{csrf_token}}>
+              {% csrf_token %}
+              {{contact_us.non_field_errors}}
+
+              <div class="row">
+                <div class="col-md-12 mb-30">
+                  <!-- <label>Your name *</label> -->
+                  {{contact_us.name}}
+                  {{contact_us.name.errors}}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-30">
+                  <!-- <label>Your email address *</label> -->
+                  {{contact_us.email}}
+                  {{contact_us.email.errors}}
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-40">
+                  <!-- <label>Message *</label> -->
+                  {{contact_us.message}}
+                  {{contact_us.message.errors}}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 text-center-xxs">
+                  <input type="submit" value="ENVIAR MENSAGEM" class="button medium deeporange" data-loading-text="Loading...">
+                </div>
+              </div>
+
+            </form>
+            <div class="alert alert-success hidden animated fadeIn" id="contactSuccess" >
+              <strong>Sucesso!</strong> Sua mensagem foi enviada para nós.
+            </div>
+
+            <div class="alert alert-danger hidden animated shake" id="contactError">
+              <strong>Erro!</strong> Ocorreu um erro enviando sua mensagem.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endif %}

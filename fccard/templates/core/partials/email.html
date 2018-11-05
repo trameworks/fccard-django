@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% autoescape off %}
+    <strong> {% trans 'Mensagem de' %}:</strong> {{ name }} <br>
+    <strong> {% trans 'Email' %}:</strong> {{ email }} <br>
+    <strong>{% trans 'Mensagem' %}:</strong> {{ message }} <br>
+{% endautoescape %}

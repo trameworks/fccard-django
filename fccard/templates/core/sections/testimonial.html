@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<div class="page-section p-60-cont owl-white-bg  fullwidth-slider">
+  <div class="owl-white-bg fullwidth-slider p-50-cont">
+
+    <!-- Slide Item -->
+    {% for testimonial in testimonials %}
+    <div class="container relative">
+      <div class="row">
+
+        <div class="col-md-7">
+          <blockquote class="testimonial-2">
+            <p>{{testimonial.testimonial|safe}}</p>
+          </blockquote>
+        </div>
+
+        <div class="col-md-4 col-md-offset-1">
+          <div class="ts-author-cont">
+            <div class="ts-author-info">
+              <div class="ts-name">
+                <span class="bold font-orange">{{testimonial.name}}</span>
+              </div>
+              <div class="ts-type">{{testimonial.position}}</div>
+            </div>
+            <div class="ts-author-img">
+              <img src="{{testimonial.image.url}}" alt="photo" >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
