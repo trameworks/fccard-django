@@ -47,7 +47,7 @@ class HomeView(base.TemplateView):
 
         try:
             howitworks_section = HowItWorksSection.objects.get(active=True)
-            howitworks_topics = howitworks_section.howitworks_set.all()
+            howitworks_topics = howitworks_section.howitworks_set.all().order_by('created_at')
         except HowItWorksSection.DoesNotExist:
             howitworks_section = None
             howitworks_topics = None

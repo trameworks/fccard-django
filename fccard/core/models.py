@@ -250,7 +250,7 @@ class HowItWorksTopic(models.Model):
     class Meta:
         verbose_name = "Tópico para seção 'Como Funciona'"
         verbose_name_plural = "Tópicos para seção 'Como Funciona'"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
 class PartnersSection(models.Model):
     title = models.CharField("Título", max_length=255, blank=False)
