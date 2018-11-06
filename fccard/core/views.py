@@ -59,7 +59,7 @@ class HomeView(base.TemplateView):
             partners_section = None
             partners = None
 
-        advantage_topics = AdvantageTopic.objects.all()
+        advantage_topics = AdvantageTopic.objects.all().order_by('created_at')
         counter_section = CounterSection.objects.all()
         testimonials = TestimonialSection.objects.all().order_by('-created_at')
 
