@@ -298,7 +298,7 @@ class PartnerIcon(models.Model):
     class Meta:
         verbose_name = "Tópico para seção 'Parceiros'"
         verbose_name_plural = "Tópicos para seção 'Parceiros'"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
 class CounterSection(models.Model):
     title = models.CharField("Título do tópico", blank=False, max_length=50)

@@ -54,7 +54,7 @@ class HomeView(base.TemplateView):
 
         try:
             partners_section = PartnersSection.objects.get(active=True)
-            partners = partners_section.partners_set.all()
+            partners = partners_section.partners_set.all().order_by('created_at')
         except PartnersSection.DoesNotExist:
             partners_section = None
             partners = None
