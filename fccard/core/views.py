@@ -33,7 +33,7 @@ class HomeView(base.TemplateView):
 
         try:
             about_card_section = AboutCardSection.objects.get(active=True)
-            about_card_topics = about_card_section.topics_set.all().order_by('-created_at')
+            about_card_topics = about_card_section.topics_set.all().order_by('created_at')
         except AboutCardSection.DoesNotExist:
             about_card_section = None
             about_card_topics = None

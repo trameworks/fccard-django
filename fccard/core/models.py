@@ -94,7 +94,7 @@ class AboutCardTopic(models.Model):
     class Meta:
         verbose_name = "Tópico para seção 'Sobre'"
         verbose_name_plural = "Tópicos para seção 'Sobre'"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
 class BenefitSection(models.Model):
     title = models.CharField("Titulo da seção", max_length=100, blank=False)
