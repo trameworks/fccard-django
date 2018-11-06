@@ -156,7 +156,7 @@ class BenefitTopic(models.Model):
     class Meta:
         verbose_name = "Tópico para seção 'Benefício'"
         verbose_name_plural = "Tópicos para seção 'Benefício'"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
 class AdvantageTopic(models.Model):
     icon = models.CharField("Nome do ícone do tópico",max_length=200, blank=False, help_text="Este valor se refere ao nome do icone. Para ver a lista com os nomes visite o link: http://themes-lab.com/make-frontend/pages/elements/icons.html")

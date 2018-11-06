@@ -40,7 +40,7 @@ class HomeView(base.TemplateView):
 
         try:
             benefit_section = BenefitSection.objects.get(active=True)
-            benefit_topics = benefit_section.benefit_set.all()
+            benefit_topics = benefit_section.benefit_set.all().order_by('created_at')
         except BenefitSection.DoesNotExist:
             benefit_section = None
             benefit_topics = None
