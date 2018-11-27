@@ -20,6 +20,7 @@ jQuery(document).ready(function($) {
 					email: $form.find('#id_email').val(),
 					subject: $form.find('#id_subject').val(),
 					message: $form.find('#id_message').val(),
+					recaptcha: $form.attr("data-sitekey"),
 					csrfmiddlewaretoken: $form.attr("data-csrf-token")
 				},
 				dataType: 'json',
