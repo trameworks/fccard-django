@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse
 from django.views.generic import edit, base
 from django.views.generic.detail import DetailView
 from django.http import JsonResponse
@@ -7,6 +7,11 @@ from .forms import ContactUs
 from .models import FlexSlide, AboutCardSection, AboutCardTopic, BenefitSection, BenefitTopic, AdvantageTopic\
                     , HowItWorksSection, HowItWorksTopic, PartnersSection, PartnerIcon, CounterSection, TestimonialSection
 
+import operator
+from django.conf import settings
+import urllib
+import urllib.request as urllib2
+import json
 
 class HomeView(base.TemplateView):
     template_name = 'core/index.html'
@@ -87,8 +92,23 @@ def contact_us(request):
         data = {}
         print(form.errors)
         if form.is_valid():
-            form.send_email()
-            data['success'] = 'success'
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = self.request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+            	'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            	'response': recaptcha_response
+            }
+            recaptcha = urllib.urlencode(values)
+            req = urllib2.Request(url, recaptcha)
+            response = urllib2.urlopen(req)
+            result = json.load(response)
+            ''' End reCAPTCHA validation '''
+            if result['success']:
+                form.send_email()
+                data['success'] = 'success'
+            else:
+                messages.error(self.request, 'reCAPTCHA inválida. Por favor, tente novamente.')
         else:
             data['error'] = 'error'
         return JsonResponse(data)
