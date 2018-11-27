@@ -105,12 +105,15 @@ def contact_us(request):
             result = json.load(response)
             ''' End reCAPTCHA validation '''
             if result['success']:
+                console.log("entrou no sucesso")
                 form.send_email()
                 data['success'] = 'success'
             else:
+                console.log("deu erro")
                 messages.error(self.request, 'reCAPTCHA inválida. Por favor, tente novamente.')
                 print(form.errors)
         else:
+            console.log("deu erro na validacao")
             data['error'] = 'error'
         return JsonResponse(data)
     else:
