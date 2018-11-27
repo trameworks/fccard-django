@@ -109,6 +109,7 @@ def contact_us(request):
                 data['success'] = 'success'
             else:
                 messages.error(self.request, 'reCAPTCHA inválida. Por favor, tente novamente.')
+                print(form.errors)
         else:
             data['error'] = 'error'
         return JsonResponse(data)
