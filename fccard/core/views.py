@@ -7,7 +7,9 @@ from .forms import ContactUs
 from .models import FlexSlide, AboutCardSection, AboutCardTopic, BenefitSection, BenefitTopic, AdvantageTopic\
                     , HowItWorksSection, HowItWorksTopic, PartnersSection, PartnerIcon, CounterSection, TestimonialSection
 
+import requests
 import operator
+from django.contrib import messages
 from django.conf import settings
 import urllib
 import urllib.request as urllib2
@@ -92,29 +94,26 @@ def contact_us(request):
         data = {}
         print(form.errors)
         if form.is_valid():
+            print('entrou valido')
             ''' Begin reCAPTCHA validation '''
-            recaptcha_response = self.request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
+            recaptcha_response = request.POST.get('recaptcha')
             values = {
-            	'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-            	'response': recaptcha_response
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
             }
-            recaptcha = urllib.urlencode(values)
-            req = urllib2.Request(url, recaptcha)
-            response = urllib2.urlopen(req)
-            result = json.load(response)
+            r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=values)
+            result = r.json()
+            print(result)
             ''' End reCAPTCHA validation '''
             if result['success']:
-                console.log("entrou no sucesso")
+                print(result)
                 form.send_email()
                 data['success'] = 'success'
             else:
-                console.log("deu erro")
-                messages.error(self.request, 'reCAPTCHA inválida. Por favor, tente novamente.')
-                print(form.errors)
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
         else:
-            console.log("deu erro na validacao")
             data['error'] = 'error'
+            print(data)
         return JsonResponse(data)
     else:
         return HttpResponseRedirect("/")

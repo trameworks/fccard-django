@@ -20,7 +20,7 @@ class ContactUs(forms.Form):
             'message': message
         })
         try:
-            email = EmailMessage(subject, html_message, email, ["cavalcantecard@farmaciacavalcante.com.br"])
+            email = EmailMessage(subject, html_message, 'noreply@mg.farmaciacavalcante.com.br', ["cavalcantecard@farmaciacavalcante.com.br"])
             email.content_subtype = "html"
             email.send()
         except BadHeaderError:
